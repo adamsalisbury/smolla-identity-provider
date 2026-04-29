@@ -23,16 +23,17 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v4
 
+            # .NET SDK 10 is installed system-wide on the runner host.
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '22'
+
             - name: Show toolchain
               run: |
-                  echo "PATH=$PATH"
-                  echo "USER=$(id -un)"
-                  echo "--- dotnet"
-                  ls -la /usr/bin/dotnet /usr/lib/dotnet/dotnet 2>&1 || true
-                  /usr/bin/dotnet --version 2>&1 || echo "dotnet not runnable"
-                  echo "--- node"
-                  ls -la /usr/bin/node /usr/local/bin/node 2>&1 || true
-                  command -v node && node --version || echo "node not on PATH"
+                  dotnet --version
+                  node --version
+                  npm --version
 
             - name: Restore (.NET)
               run: dotnet restore
