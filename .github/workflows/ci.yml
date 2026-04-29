@@ -13,7 +13,7 @@ concurrency:
 jobs:
     test:
         name: test
-        runs-on: [self-hosted, linux, smolla]
+        runs-on: [self-hosted, smolla-identity-provider]
 
         defaults:
             run:
