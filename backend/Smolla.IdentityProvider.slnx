@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Smolla.IdentityProvider.Api/Smolla.IdentityProvider.Api.csproj" />
+    <Project Path="src/Smolla.IdentityProvider.Application/Smolla.IdentityProvider.Application.csproj" />
+    <Project Path="src/Smolla.IdentityProvider.Domain/Smolla.IdentityProvider.Domain.csproj" />
+    <Project Path="src/Smolla.IdentityProvider.Host/Smolla.IdentityProvider.Host.csproj" />
+    <Project Path="src/Smolla.IdentityProvider.Infrastructure/Smolla.IdentityProvider.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Smolla.IdentityProvider.Application.Tests/Smolla.IdentityProvider.Application.Tests.csproj" />
+    <Project Path="tests/Smolla.IdentityProvider.Domain.Tests/Smolla.IdentityProvider.Domain.Tests.csproj" />
+    <Project Path="tests/Smolla.IdentityProvider.Infrastructure.Tests/Smolla.IdentityProvider.Infrastructure.Tests.csproj" />
+    <Project Path="tests/Smolla.IdentityProvider.Integration.Tests/Smolla.IdentityProvider.Integration.Tests.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,40 @@
+# Build artefacts
+**/bin/
+**/obj/
+**/dist/
+**/node_modules/
+**/.vite/
+**/.npm/
+**/.pnpm-store/
+**/coverage/
+**/TestResults/
+**/.tmp/
+
+# IDE / OS
+.vs/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# VCS / CI
+.git/
+.github/
+.gitignore
+.editorconfig
+
+# Tests are not packaged into the runtime image
+backend/tests/
+
+# Local secrets / dev config
+**/.env
+**/.env.*
+!**/.env.example
+**/appsettings.Development.json.local
+
+# Docs / repo metadata
+*.md
+LICENSE
+claude-info/
+deploy.sh
+setup-repo.sh

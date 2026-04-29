@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <RootNamespace>Smolla.IdentityProvider.Api</RootNamespace>
+        <AssemblyName>Smolla.IdentityProvider.Api</AssemblyName>
+        <IsPackable>false</IsPackable>
+        <OutputType>Library</OutputType>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Smolla.IdentityProvider.Application\Smolla.IdentityProvider.Application.csproj" />
+    </ItemGroup>
+
+</Project>

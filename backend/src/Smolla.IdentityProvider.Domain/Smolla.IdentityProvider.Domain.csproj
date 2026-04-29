@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <RootNamespace>Smolla.IdentityProvider.Domain</RootNamespace>
+        <AssemblyName>Smolla.IdentityProvider.Domain</AssemblyName>
+    </PropertyGroup>
+
+</Project>

@@ -1,0 +1,70 @@
+name: CI
+
+on:
+    push:
+        branches: ['**']
+    pull_request:
+        branches: [main, develop]
+
+concurrency:
+    group: ci-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    test:
+        name: test
+        runs-on: [self-hosted, linux, smolla]
+
+        defaults:
+            run:
+                working-directory: ${{ github.workspace }}
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup .NET
+              uses: actions/setup-dotnet@v4
+              with:
+                  dotnet-version: '10.0.x'
+
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '22'
+
+            - name: Restore (.NET)
+              run: dotnet restore
+              working-directory: backend
+
+            - name: Build (.NET)
+              run: dotnet build --no-restore --configuration Release
+              working-directory: backend
+
+            - name: Unit tests
+              run: dotnet test --no-build --configuration Release --filter "Category=Unit" --logger "trx;LogFileName=unit.trx"
+              working-directory: backend
+
+            - name: Integration tests
+              run: dotnet test --no-build --configuration Release --filter "Category=Integration" --logger "trx;LogFileName=integration.trx"
+              working-directory: backend
+
+            - name: Install (frontend)
+              run: npm ci
+              working-directory: frontend
+
+            - name: Type-check (frontend)
+              run: npm run type-check
+              working-directory: frontend
+
+            - name: Build (frontend)
+              run: npm run build
+              working-directory: frontend
+
+            - name: Upload test results
+              if: always()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: test-results-${{ github.run_id }}
+                  path: backend/**/TestResults/*.trx
+                  retention-days: 14
