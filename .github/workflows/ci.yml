@@ -23,15 +23,12 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v4
 
-            - name: Setup .NET
-              uses: actions/setup-dotnet@v4
-              with:
-                  dotnet-version: '10.0.x'
-
-            - name: Setup Node
-              uses: actions/setup-node@v4
-              with:
-                  node-version: '22'
+            - name: Show toolchain
+              run: |
+                  dotnet --version
+                  dotnet --list-sdks
+                  node --version
+                  npm --version
 
             - name: Restore (.NET)
               run: dotnet restore
