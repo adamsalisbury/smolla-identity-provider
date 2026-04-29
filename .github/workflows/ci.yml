@@ -25,10 +25,14 @@ jobs:
 
             - name: Show toolchain
               run: |
-                  dotnet --version
-                  dotnet --list-sdks
-                  node --version
-                  npm --version
+                  echo "PATH=$PATH"
+                  echo "USER=$(id -un)"
+                  echo "--- dotnet"
+                  ls -la /usr/bin/dotnet /usr/lib/dotnet/dotnet 2>&1 || true
+                  /usr/bin/dotnet --version 2>&1 || echo "dotnet not runnable"
+                  echo "--- node"
+                  ls -la /usr/bin/node /usr/local/bin/node 2>&1 || true
+                  command -v node && node --version || echo "node not on PATH"
 
             - name: Restore (.NET)
               run: dotnet restore
