@@ -1,3 +1,4 @@
+// CI smoke test — exercising the build and deploy-staging workflow.
 using Serilog;
 using Smolla.IdentityProvider.Application.DependencyInjection;
 using Smolla.IdentityProvider.Host.Configuration;
