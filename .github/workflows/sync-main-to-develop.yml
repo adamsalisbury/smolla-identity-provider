@@ -25,11 +25,17 @@ jobs:
             - name: Determine sync need
               id: diff
               run: |
+                  # Tree-diff, not commit-diff. After a normal develop→main
+                  # promotion the merge commit on main is not on develop, so a
+                  # commit-diff would always claim a sync is needed; the trees
+                  # are identical and there is nothing to back-merge. We only
+                  # want to open a PR when prod (main) actually contains
+                  # content that develop does not — i.e. a hotfix.
                   git fetch --no-tags origin develop main
-                  if git log --oneline origin/develop..origin/main | grep -q .; then
-                      echo "has-changes=true" >> "$GITHUB_OUTPUT"
-                  else
+                  if git diff --quiet origin/develop origin/main; then
                       echo "has-changes=false" >> "$GITHUB_OUTPUT"
+                  else
+                      echo "has-changes=true" >> "$GITHUB_OUTPUT"
                   fi
 
             - name: Open or update sync PR
