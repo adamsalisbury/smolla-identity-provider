@@ -26,7 +26,7 @@ async function signIn(): Promise<void> {
 .login-shell {
     display: grid;
     place-items: center;
-    height: 100vh;
+    height: 100%;
     background: #fafafa;
 }
 
