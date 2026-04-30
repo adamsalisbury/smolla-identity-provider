@@ -17,7 +17,7 @@
         <Copyright>Copyright (c) Adam Salisbury</Copyright>
 
         <!-- Managed by release-please. Do not edit by hand. -->
-        <Version>0.1.0</Version>
+        <Version>0.2.0</Version>
 
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <!--
