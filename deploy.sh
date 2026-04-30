@@ -3,7 +3,8 @@
 # Deploy the smolla-identity-provider Docker image to a target environment on
 # the Linode. Invoked by the GitHub Actions deploy workflows. Because the
 # self-hosted runner lives on the same Linode as the docker compose project,
-# this script talks to the local Docker daemon directly — no SSH.
+# this script talks to the local Docker daemon directly — no SSH, no remote
+# transport, no extra credentials.
 #
 # Usage:
 #   ./deploy.sh test       # docker pull + docker compose up -d identity-test
