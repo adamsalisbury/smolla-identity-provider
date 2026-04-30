@@ -6,6 +6,7 @@
 # this script talks to the local Docker daemon directly — no SSH.
 #
 # Usage:
+#   ./deploy.sh test       # docker pull + docker compose up -d identity-test
 #   ./deploy.sh staging    # docker pull + docker compose up -d identity-staging
 #   ./deploy.sh prod       # docker pull + docker compose up -d identity-prod
 #
@@ -16,6 +17,10 @@ ENVIRONMENT="${1:-}"
 COMPOSE_PROJECT_DIR="${SMOLLA_COMPOSE_DIR:-/opt/smolla/identity}"
 
 case "${ENVIRONMENT}" in
+    test)
+        SERVICE="identity-test"
+        IMAGE_TAG="test"
+        ;;
     staging)
         SERVICE="identity-staging"
         IMAGE_TAG="staging"
@@ -25,7 +30,7 @@ case "${ENVIRONMENT}" in
         IMAGE_TAG="latest"
         ;;
     *)
-        echo "usage: $0 {staging|prod}" >&2
+        echo "usage: $0 {test|staging|prod}" >&2
         exit 1
         ;;
 esac
