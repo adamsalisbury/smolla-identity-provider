@@ -22,8 +22,9 @@
             CA1848  - prefer LoggerMessage source-generated delegates (perf nicety, not required)
             CA1873  - argument may be expensive when logging is disabled (covered by template arguments)
             CA2007  - ConfigureAwait(false) (only relevant in library code; this is an app)
+            CA1861  - avoid constant arrays as arguments (fires on EF Core generated migration code)
         -->
-        <NoWarn>$(NoWarn);CS1591;CA1848;CA1873;CA2007;CA1305</NoWarn>
+        <NoWarn>$(NoWarn);CS1591;CA1848;CA1873;CA2007;CA1305;CA1861</NoWarn>
     </PropertyGroup>
 
 </Project>
