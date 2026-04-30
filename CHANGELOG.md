@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.0](https://github.com/adamsalisbury/smolla-identity-provider/compare/v0.1.0...v0.2.0) (2026-04-30)
+
+
+### Features
+
+* add /api/version endpoint ([a372ee9](https://github.com/adamsalisbury/smolla-identity-provider/commit/a372ee99a9bb38d1dacc0a97044ff1b3f79028cd))
+* add /api/version endpoint exposing the assembly version ([abf198c](https://github.com/adamsalisbury/smolla-identity-provider/commit/abf198cd3a52efe24ef85b490226831e2ea83a1d))
+* add /api/version endpoint exposing the assembly version ([86722df](https://github.com/adamsalisbury/smolla-identity-provider/commit/86722df848a8f27ce757e29e683ef29caca695bf))
+
 ## 0.1.0 (2026-04-30)
 
 
