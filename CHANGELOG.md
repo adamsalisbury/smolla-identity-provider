@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.3.0](https://github.com/adamsalisbury/smolla-identity-provider/compare/v0.2.0...v0.3.0) (2026-04-30)
+
+
+### Features
+
+* render running version in a footer fetched from /api/version ([3e22eb3](https://github.com/adamsalisbury/smolla-identity-provider/commit/3e22eb3bd5b56d4bf021dc934f2db10de3902554))
+* render running version in a footer fetched from /api/version ([2c3daec](https://github.com/adamsalisbury/smolla-identity-provider/commit/2c3daec9ce4b85ba3f48c4623802e0da96840152))
+* render running version in a footer fetched from /api/version ([0702d83](https://github.com/adamsalisbury/smolla-identity-provider/commit/0702d836834bd33a4da9351b68166623c4abba77))
+
 ## [0.2.0](https://github.com/adamsalisbury/smolla-identity-provider/compare/v0.1.0...v0.2.0) (2026-04-30)
 
 
