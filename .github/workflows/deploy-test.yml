@@ -1,9 +1,9 @@
 name: Deploy to Test
 
 # Manual-only — triggered from the Actions tab (or `gh workflow run`) against
-# any branch. Single-tenant test slot (`test-identity.smol.la`, port 10003,
-# db `smolla-identity-test`). Whoever ships last owns it; coordinate with
-# whoever else is reviewing on test.
+# any branch (typically a `feature/*` or `hotfix/*`). Single-tenant test slot
+# (`test-identity.smol.la`, port 10003, db `smolla-identity-test`). Whoever
+# ships last owns it; coordinate with whoever else is reviewing on test.
 
 on:
     workflow_dispatch:
