@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # One-shot bootstrap for repository-side configuration:
-#   - Branch protection on `main` (require PR + green CI, no force push)
+#   - Branch protection on `main`    (require PR + green CI, no force push)
 #   - Branch protection on `develop` (require green CI)
 #
 # Both `main` and `develop` must already exist on the remote when this is run,
@@ -9,6 +9,12 @@
 #
 # Requires: gh CLI authenticated (`gh auth status`).
 # Usage:    ./setup-repo.sh
+#
+# Notes on the API:
+#   - `restrictions` and `required_pull_request_reviews` accept null OR an
+#     object. The `gh api -F` form encoding cannot send a literal null, so we
+#     build a JSON body and PUT it via --input -.
+#   - This call is idempotent: PUTting the same body again is a no-op.
 #
 
 set -euo pipefail
@@ -30,22 +36,40 @@ fi
 
 protect_branch() {
     local branch="$1"
-    local require_pr_review_count="$2"
+    local enforce_admins="$2"
+    local require_pr="$3"
 
     echo "  -> protecting ${branch}"
 
-    gh api -X PUT "repos/${REPO}/branches/${branch}/protection" \
-        -F "required_status_checks[strict]=true" \
-        -F "required_status_checks[contexts][]=${STATUS_CHECK}" \
-        -F "enforce_admins=true" \
-        -F "required_pull_request_reviews[required_approving_review_count]=${require_pr_review_count}" \
-        -F "required_pull_request_reviews[dismiss_stale_reviews]=true" \
-        -F "restrictions=" \
-        -F "allow_force_pushes=false" \
-        -F "allow_deletions=false"
+    local pr_block="null"
+    if [[ "${require_pr}" == "true" ]]; then
+        pr_block='{"required_approving_review_count":0,"dismiss_stale_reviews":true,"require_code_owner_reviews":false}'
+    fi
+
+    local body
+    body=$(cat <<EOF
+{
+    "required_status_checks": {
+        "strict": true,
+        "contexts": ["${STATUS_CHECK}"]
+    },
+    "enforce_admins": ${enforce_admins},
+    "required_pull_request_reviews": ${pr_block},
+    "restrictions": null,
+    "allow_force_pushes": false,
+    "allow_deletions": false,
+    "required_linear_history": false,
+    "required_conversation_resolution": false
+}
+EOF
+)
+
+    echo "${body}" | gh api -X PUT "repos/${REPO}/branches/${branch}/protection" --input - >/dev/null
 }
 
-protect_branch "main" 0
-protect_branch "develop" 0
+# main:    require PR + green CI, enforce on admins
+# develop: require green CI only (you push direct as a solo dev)
+protect_branch "main" "true" "true"
+protect_branch "develop" "false" "false"
 
 echo "Done."
